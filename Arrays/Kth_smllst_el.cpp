@@ -14,7 +14,7 @@ for(el=0;el<max+1 && k!=0;el++){
         k--;
     }
 }
-return el;
+return el-1;
 }
 int main(){
 int n,k;
