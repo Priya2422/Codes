@@ -1,4 +1,5 @@
 #include<iostream>
+#include<cmath>
 using namespace std;
 class Solution {
 public:
@@ -20,30 +21,33 @@ public:
     }return ans;
     }
     double precision(int n,int prec,int temp){
-        double factor =1;
-        double fac =9;
-        double ans=temp;
+        float factor =1.0;
+        double fac =9.0;
+        float ans=temp;
         if(ans*ans==n)return ans;
-        for(int m=0;m<prec;m++){
-            factor=factor/10;
-            fac=fac/10;
-            double i=factor;
+        for(int m=0,mul=10;m<prec;m++,mul=mul*10){
+            factor=factor/10.0;
+            fac=fac/10.0;
+            float i=factor;
             double j=fac;
-            double mid=(i+j)/2;
-            double je=ans;
+            float mid=(i+j)/2;
+            float je=ans;
             while(i<=j){
                 je=je+mid;
                 if(je*je<n){
                     ans=je;
-                    i=mid+1;
+                    i=mid+factor;
                 }
                 else if(je*je==n){
                     ans=je;
                     return ans;
                 }else{
-                    j=mid-1;
+                    j=mid-factor;
                 }
                 mid=(i+j)/2;
+                int k=mid*mul;
+                mid=trunc(k);
+                mid=mid/mul;
             }
         }
          return ans;
@@ -56,5 +60,5 @@ int main(){
     Solution st;
     int val=st.mySqrtInt(n);
     // cout<<val;
-    cout<<st.precision(n,3,val);
+    cout<<st.precision(n,4,val);
 }
